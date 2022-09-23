@@ -32,10 +32,10 @@ public class UserDaoImp implements UserDao {
    public User getUserByCar(Car car) {
       String HQL = "select u from User u INNER JOIN u.car car where car.model = :model and car.series = :series";
 //      TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(HQL).setParameter("model", car.getModel()).setParameter("series", car.getSeries());
-      List<User> list = sessionFactory.getCurrentSession().createQuery(HQL)
+      User user = (User) sessionFactory.getCurrentSession().createQuery(HQL)
               .setParameter("model", car.getModel())
               .setParameter("series", car.getSeries())
-              .getResultList();
-      return list.get(0);
+              .getSingleResult();
+      return user;
    }
 }
